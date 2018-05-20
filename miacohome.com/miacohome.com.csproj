@@ -2155,6 +2155,7 @@
     <Content Include="Views\Portfolio_item.cshtml" />
     <Content Include="Views\ProcessPage.cshtml" />
     <Content Include="Views\cONTACTS\MasterPages.cshtml" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
