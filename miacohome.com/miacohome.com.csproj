@@ -1943,6 +1943,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ContactModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2145,7 +2146,7 @@
     <Content Include="Views\AboutUSPage.cshtml" />
     <Content Include="Views\BlogPage.cshtml" />
     <Content Include="Views\Blog_item.cshtml" />
-    <Content Include="Views\ContactsPage.cshtml" />
+    <Content Include="Views\cONTACTS\ContactsPage.cshtml" />
     <Content Include="Views\HomePage.cshtml" />
     <Content Include="Views\ImprovePacketForm.cshtml" />
     <Content Include="Views\MasterPages.cshtml" />
@@ -2153,6 +2154,7 @@
     <Content Include="Views\PortfolioPage.cshtml" />
     <Content Include="Views\Portfolio_item.cshtml" />
     <Content Include="Views\ProcessPage.cshtml" />
+    <Content Include="Views\cONTACTS\MasterPages.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2164,8 +2166,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="css\Slider\" />
     <Folder Include="fonts\" />
-    <Folder Include="Models\" />
-    <Folder Include="Views\cONTACTS\" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
