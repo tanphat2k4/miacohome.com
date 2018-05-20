@@ -3,6 +3,8 @@
     Layout = "MasterPages.cshtml";
 }
 
+@* the fun starts here *@
+
 @{
     var currentNode = UmbracoContext.Current.PublishedContentRequest.PublishedContent;
     var projects = currentNode.Children;
@@ -86,7 +88,7 @@
         }
         @foreach (var item in projects)
         {
-            var thumbnail = Umbraco.TypedMedia(item.GetPropertyValue<int>("images"));
+            var thumbnail = Umbraco.TypedMedia(item.GetPropertyValue<int>("thumbnail"));
             var url = String.Empty;
             if (thumbnail != null)
             {
@@ -115,4 +117,3 @@
     <!--End Content-->
 
 </body>
-

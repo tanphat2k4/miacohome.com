@@ -8,7 +8,7 @@
     var protfolio = rootNode.DescendantsOrSelf("portfolio").First();
 
     var currentNode = UmbracoContext.Current.PublishedContentRequest.PublishedContent;
-    var thumbnail = currentNode.GetPropertyValue<string>("thumbnail").Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+    var images = currentNode.GetPropertyValue<string>("images").Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 }
 
 <body>
@@ -33,7 +33,8 @@
         <span style="font-size:40px;text-align:center; display:block">@currentNode.Name</span>
     </div>
     <div style="width:1200px;margin:0 auto;margin-bottom:3em">
-        @foreach (var id in thumbnail)
+
+        @foreach (var id in images)
         {
             var image = Umbraco.TypedMedia(id);
             var url = String.Empty;

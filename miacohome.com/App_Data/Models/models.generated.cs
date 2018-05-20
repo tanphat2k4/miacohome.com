@@ -19,8 +19,8 @@ using Umbraco.ModelsBuilder;
 using Umbraco.ModelsBuilder.Umbraco;
 
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "afaec3311158354b")]
-[assembly:System.Reflection.AssemblyVersion("0.0.0.2")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "56c40fce5a7fbcf3")]
+[assembly:System.Reflection.AssemblyVersion("0.0.0.9")]
 
 namespace Umbraco.Web.PublishedContentModels
 {
@@ -569,6 +569,77 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 	}
 
+	/// <summary>Process</summary>
+	[PublishedContentModel("process")]
+	public partial class Process : PublishedContentModel
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "process";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public Process(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Process, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Hide in navigation
+		///</summary>
+		[ImplementPropertyType("hideInNavigation")]
+		public bool HideInNavigation
+		{
+			get { return this.GetPropertyValue<bool>("hideInNavigation"); }
+		}
+
+		///<summary>
+		/// steps01
+		///</summary>
+		[ImplementPropertyType("steps01")]
+		public IPublishedContent Steps01
+		{
+			get { return this.GetPropertyValue<IPublishedContent>("steps01"); }
+		}
+
+		///<summary>
+		/// steps02
+		///</summary>
+		[ImplementPropertyType("steps02")]
+		public IPublishedContent Steps02
+		{
+			get { return this.GetPropertyValue<IPublishedContent>("steps02"); }
+		}
+
+		///<summary>
+		/// steps03
+		///</summary>
+		[ImplementPropertyType("steps03")]
+		public IPublishedContent Steps03
+		{
+			get { return this.GetPropertyValue<IPublishedContent>("steps03"); }
+		}
+
+		///<summary>
+		/// steps04
+		///</summary>
+		[ImplementPropertyType("steps04")]
+		public IPublishedContent Steps04
+		{
+			get { return this.GetPropertyValue<IPublishedContent>("steps04"); }
+		}
+	}
+
 	/// <summary>Portfolio</summary>
 	[PublishedContentModel("portfolio")]
 	public partial class Portfolio : PublishedContentModel
@@ -654,77 +725,6 @@ namespace Umbraco.Web.PublishedContentModels
 		public IPublishedContent Thumbnail
 		{
 			get { return this.GetPropertyValue<IPublishedContent>("thumbnail"); }
-		}
-	}
-
-	/// <summary>Process</summary>
-	[PublishedContentModel("process")]
-	public partial class Process : PublishedContentModel
-	{
-#pragma warning disable 0109 // new is redundant
-		public new const string ModelTypeAlias = "process";
-		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
-#pragma warning restore 0109
-
-		public Process(IPublishedContent content)
-			: base(content)
-		{ }
-
-#pragma warning disable 0109 // new is redundant
-		public new static PublishedContentType GetModelContentType()
-		{
-			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
-		}
-#pragma warning restore 0109
-
-		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Process, TValue>> selector)
-		{
-			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
-		}
-
-		///<summary>
-		/// Hide in navigation
-		///</summary>
-		[ImplementPropertyType("hideInNavigation")]
-		public bool HideInNavigation
-		{
-			get { return this.GetPropertyValue<bool>("hideInNavigation"); }
-		}
-
-		///<summary>
-		/// steps01
-		///</summary>
-		[ImplementPropertyType("steps01")]
-		public IPublishedContent Steps01
-		{
-			get { return this.GetPropertyValue<IPublishedContent>("steps01"); }
-		}
-
-		///<summary>
-		/// steps02
-		///</summary>
-		[ImplementPropertyType("steps02")]
-		public IPublishedContent Steps02
-		{
-			get { return this.GetPropertyValue<IPublishedContent>("steps02"); }
-		}
-
-		///<summary>
-		/// steps03
-		///</summary>
-		[ImplementPropertyType("steps03")]
-		public IPublishedContent Steps03
-		{
-			get { return this.GetPropertyValue<IPublishedContent>("steps03"); }
-		}
-
-		///<summary>
-		/// steps04
-		///</summary>
-		[ImplementPropertyType("steps04")]
-		public IPublishedContent Steps04
-		{
-			get { return this.GetPropertyValue<IPublishedContent>("steps04"); }
 		}
 	}
 
