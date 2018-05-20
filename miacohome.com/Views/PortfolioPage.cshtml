@@ -1,7 +1,118 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
-	Layout = "MasterPages.cshtml";
+    Layout = "MasterPages.cshtml";
 }
 
-@* the fun starts here *@
+@{
+    var currentNode = UmbracoContext.Current.PublishedContentRequest.PublishedContent;
+    var projects = currentNode.Children;
+    <!--Phan anh-->
+    const int ImageSize = 6;
+    int image = 1;
+
+    if (!int.TryParse(Request["image"], out image))
+    {
+        image = 1;
+    }
+
+    int totalNodes = projects.Count();
+    int totalImages = (int)Math.Ceiling((double)totalNodes / ImageSize);
+
+    if (image > totalImages)
+    {
+        image = totalImages;
+    }
+    else if (image < 1)
+    {
+        image = 1;
+    }
+
+    var listItems = projects.Skip((image - 1) * ImageSize).Take(ImageSize).ToList();
+}
+
+<body>
+    <!--Start Path-->
+    <div class="path" style="height: 45px;width:100%;border-bottom:0.5px solid rgba(0,0,0,0.23) ">
+        <div class="container-fluid" id="path" style="height:45px;width: 100%;margin-top:80px">
+            <div id="groupPath">
+                <ul style="list-style:none;margin-bottom: 6px;margin-left: -53px;">
+                    <li><a href="/"><div style="color:black"><i class="fa fa-home"></i></div></a></li>
+                    <li style="margin-left: -7px;"><a href="#"><div><i class="fa fa-angle-right"></i></div></a></li>
+                    <li style="margin-left: -7px;padding-top: 0;"><a href="@currentNode.Url"><p>PORTFOLIO</p></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--End Path-->
+    <!--Start Content-->
+    <div class="text-center">
+        <div style="display: inline-block;position:  relative;background-color:  white;margin-top: 35px;margin-bottom:35px;margin-left: -120px;">
+            <span><h1 style="text-align:center">PORTFOLIO</h1></span>
+
+        </div>
+        <!--doubleHR-->
+        <div style="width:100%;height:1px;border-bottom: 1px solid #f0f0f0;margin-top: -74px;display: inherit;">
+            <div style="width:100%;height:1px;border-bottom:  1px solid #f0f0f0;display: inherit;padding-top: 3px;"></div>
+        </div>
+        <div class="clearfix"></div>
+        <!--doubleHR-->
+        <div style="width:160.38px;height:37.97px; margin: 0 auto;margin-bottom:25px;border: 1px solid rgba(0,0,0,0.125);color:rgba(0,0,0,0.375);border-radius: .35em;text-align: center;text-transform: uppercase;font-size: 13px;cursor: pointer;padding: .692em 1.154em .769em;display: inline-block;
+                float: none;position: relative;margin-top:50px">
+            <a style="color:rgba(0,0,0,0.375);"><i class="fa fa-sort"></i>Sort Portfolio</a>
+        </div>
+        <div style="width:1200px; margin: 0 auto">
+            <ul>
+                <li style="width:56.64px;height:36.97px; margin: 0 auto;margin-bottom:25px;border: 1px solid rgba(0,0,0,0.125);color:rgba(0,0,0,0.375);border-radius: .35em;text-align: center;text-transform: uppercase;font-size: 13px;cursor: pointer;padding: .692em 1.154em .769em;display: inline-block;
+                float: none;position: relative;">All</li>
+                <li style="width:214.03px;height:36.97px; margin: 0 auto;margin-bottom:25px;border: 1px solid rgba(0,0,0,0.125);color:rgba(0,0,0,0.375);border-radius: .35em;text-align: center;text-transform: uppercase;font-size: 13px;cursor: pointer;padding: .692em 1.154em .769em;display: inline-block;
+                float: none;position: relative;">Accomplished Projects</li>
+            </ul>
+        </div>
+
+    </div>
+    <!---->
+    <div style="width:auto; margin: 0 auto;">
+        @if (totalImages > 1)
+        {
+            const int itemsPerGroup = 6;
+            var currentGroup = (int)Math.Ceiling((double)image / itemsPerGroup);
+            int startItem = (currentGroup - 1) * itemsPerGroup;
+            int endItem = startItem + itemsPerGroup;
+            if (endItem > totalImages)
+            {
+                endItem = totalImages;
+
+            }
+        }
+        @foreach (var item in projects)
+        {
+            var thumbnail = Umbraco.TypedMedia(item.GetPropertyValue<int>("images"));
+            var url = String.Empty;
+            if (thumbnail != null)
+            {
+                url = thumbnail.Url;
+            }
+            <ul>
+                <li>
+                    <div class="div01 col-sm-6 col-xs-12" style="padding:0;box-shadow: 0 0.15em 0.35em 0 rgba(0,0,0,0.135);margin-top:30px;margin-bottom: 50px;width:584px;height:100%;margin-left:-37px;border-radius:  6px;">
+                        <div><a href="@item.Url"><img src="@url" style="width:584px;height:780px" /></a></div>
+                        <div style="text-align:center;width:584px;height:102px;text-transform:uppercase;font-size:15px;font-style:normal;padding: 29px 6.5% 35px;"><a href="@item.Url">@item.Name</a></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="div02 col-sm-6 col-xs-12" style="padding:0;float:right; box-shadow: 0 0.15em 0.35em 0 rgba(0,0,0,0.135);margin-top:30px;margin-bottom: 50px;width:584px;height:100%;margin-left: 7px;border-radius:  6px;">
+                        <div><a href=""><img src="~/images/BEDROOM FLAT. BUDGET £10,000-02.jpg" style="width:100%;height:100%" /></a></div>
+                        <div style="text-align:center;width:584px;height:102px;text-transform:uppercase;font-size:15px;font-style:normal;padding: 29px 6.5% 35px;"><a href="">“FURNISH” PACKAGE. THREE BEDROOM HOUSE. BUDGET £17,000</a></div>
+                    </div>
+                </li>
+
+            </ul>
+        }
+
+
+
+    </div>
+    <!--End Content-->
+
+</body>
 

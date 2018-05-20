@@ -1,7 +1,108 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
-	Layout = "MasterPages.cshtml";
+    Layout = "MasterPages.cshtml";
 }
 
 @* the fun starts here *@
 
+@{
+    var currentNode = UmbracoContext.Current.PublishedContentRequest.PublishedContent;
+    var projects = currentNode.Children;
+}
+
+
+<body>
+    <!--Start Path-->
+    <div class="path" style="height: 45px;width:100%;border-bottom:0.5px solid rgba(0,0,0,0.23) ">
+        <div class="container-fluid" id="path" style="height:45px;width: 100%;margin-top:80px">
+            <div id="groupPath">
+                <ul style="list-style:none;margin-bottom: 6px;margin-left: -53px;">
+                    <li><a href="/"><div style="color:black"><i class="fa fa-home"></i></div></a></li>
+                    <li style="margin-left: -7px;"><a href="#"><div><i class="fa fa-angle-right"></i></div></a></li>
+                    <li style="margin-left: -7px;padding-top: 0;"><a href="@currentNode.Url"><p>Packages</p></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--End Path-->
+    <!--Content-->
+    <div>
+        <div class="text-center" style="display: inline-block;position:  relative;background-color:  white;margin-top: 35px;margin-left: 279px;">
+            <span><h1 style="text-align:center">ROOM DESIGN PACKAGES</h1></span>
+        </div>
+        <!--doubleHR-->
+        <div style="width:100%;height:1px;border-bottom: 1px solid #f0f0f0;margin-top: -40px;display: inherit;">
+            <div style="width:100%;height:1px;border-bottom:  1px solid #f0f0f0;display: inherit;padding-top: 3px;"></div>
+        </div>
+        <!--doubleHR-->
+        <div class="clearfix"></div>
+        <div style="margin-top:  35px;margin-bottom: 35px;margin-left: 179px;">
+            <span>We offer different packages of interior design that are affordable to our customers and with 100% efforts in each one of them.</span>
+        </div>
+        <div class="clearfix"></div>
+        <div>
+            <div class="row slideanim">
+                <div class="col-sm-4 col-xs-12">
+                    <div class="">
+                        <div class="text-center">
+                            <h1>FURNISH </h1>
+                        </div>
+                        <div class="text-center">
+                            <img class="aligncenter size-full wp-image-5253" src="https://krikla.com/wp-content/uploads/2018/02/krikla-design-service-250.png" alt="Furnish - Interior design services by Krikla" width="300" height="520">
+                        </div>
+                        <div class="text-center" style="margin-top:23px">
+                            <button class="btn btn-lg" href="#">GET A QUOTE </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-xs-12">
+                    <div class="text-center">
+                        <div class="">
+                            <h1>IMPROVE</h1>
+                        </div>
+                        <div class="">
+                            <img class="aligncenter size-full wp-image-5254" src="https://krikla.com/wp-content/uploads/2018/02/krikla-design-service-350.png" alt="Improve - Interior design services by Krikla" width="300" height="520">
+                        </div>
+                        <div class="text-center" style="margin-top:23px">
+                            <button class="btn btn-lg" href="#">GET A QUOTE</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-xs-12">
+                    <div class="text-center">
+                        <div class="">
+                            <h1>REFURBISH</h1>
+                        </div>
+                        <div class="">
+                            <img class="aligncenter size-full wp-image-5255" src="https://krikla.com/wp-content/uploads/2018/02/krikla-design-service-600.png" alt="Refurbish - Interior design services by Krikla" width="300" height="520">
+                        </div>
+                        <div class="text-center" style="margin-top:23px">
+                            <button class="btn btn-lg" href="#">GET A QUOTE </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--FAQ-->
+        <div class="text-center" style="display: inline-block;position:  relative;background-color:  white;margin-top: 35px;left:50%;font-size:10px;top:-14px">
+            <span><h1 style="text-align:center">FAQ</h1></span>
+        </div>
+        <!--doubleHR-->
+        <div style="width:100%;height:1px;border-bottom: 1px solid #f0f0f0;margin-top: -40px;display: inherit;">
+            <div style="width:100%;height:1px;border-bottom:  1px solid #f0f0f0;display: inherit;padding-top: 3px;"></div>
+        </div>
+        <!--doubleHR-->
+        <div>
+            <div class="" style="margin-top: 50px; margin-bottom: 70px;">
+                <ul style="list-style:none;text-transform:uppercase;">
+                    <li style="border:1px solid #eee;border-radius:6px; width:574px;height:46px;color:#666;text-decoration:none"><h4><i class="fa fa-angle-down"></i><a href="" style="color:#666">Do you favour a particular style of design?</h4></a></li>
+                    <li style="border:1px solid #eee;border-radius:6px; width:574px;height:46px;color:#666"><h4><i class="fa fa-angle-down"></i><a href="" style="color:#666;padding-right:5px">I don’t know which interior design package is right for me. Can you help me choose the right one?</h4></a></li>
+                    <li style="border:1px solid #eee;border-radius:6px; width:574px;height:46px;color:#666"><h4><i class="fa fa-angle-down"></i><a href="" style="color:#666">Do you have to see the property in person to draw up a design proposal?</h4></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <!--The end Content-->
+
+</body>

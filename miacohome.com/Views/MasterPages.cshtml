@@ -1,7 +1,133 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
-	Layout = null;
+    Layout = null;
 }
 
-@* the fun starts here *@
+@{
+    var rootNode = Umbraco.TypedContentAtRoot();
+    var menuItems = rootNode.First().Children.Where(x => x.GetPropertyValue<bool>("hideInNavigation") == false);
+    var portfolio = rootNode.DescendantsOrSelf("portfolio").First();
+    var aboutUs = rootNode.DescendantsOrSelf("aBOUTUS").First();
+    var process = rootNode.DescendantsOrSelf("process").First();
+    var packages = rootNode.DescendantsOrSelf("packages").First();
+    var portfolioItems = rootNode.DescendantsOrSelf("portfolio_item").Where(x => x.GetPropertyValue<bool>("choose")).ToList();
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <title>Ms.Ngoc</title>
+    <link href="~/css/Style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--Slider banner-->
+    <style>
+        .carousel-inner > .item > img,
+        .carousel-inner > .item > a > img {
+            width: 70%;
+            margin: auto;
+        }
+    </style>
 
+    <!--sliderjcarousel LATEST BLOG POSTS-->
+    <script src="~/js/Slider/jquery.jcarousel.min.js"></script>
+    <script src="~/js/Slider/jquery-2.1.1.min.js"></script>
+    <script src="~/js/Slider/site.js"></script>
+
+    <script src="~/js/Slider/Custom.js"></script>
+    <script src="~/js/Slider/jquery.singlePageNav.min.js"></script>
+
+</head>
+
+<body>
+    <!--Star Navbar-->
+    <script>
+        $(function () {
+            var url = window.location.href;
+            $("#menu").find("a").each(function () {
+                var $self = $(this);
+                if (url.indexOf($self.attr("href")) > 1) {
+                    $("#menu").find("li").removeClass("menu_active");
+                    $self.closest("li").addClass("menu_active");
+                }
+            });
+        })
+    </script>
+    <nav class="navbar navbar navbar-fixed-top" style="background-color:white;border:none; border-bottom: 2px solid #ccc; box-shadow:0 0.15em 0.35em 0 rgba(0,0,0,0.135); width:auto; height:80px;">
+
+        <div class="navbar-header">
+
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu" style="border-color:black">
+                <span class="icon-bar" style="background-color:#97b2ba"></span>
+                <span class="icon-bar" style="background-color:#97b2ba"></span>
+                <span class="icon-bar" style="background-color:#97b2ba"></span>
+            </button>
+            <a class="navbar-brand" href="/" style="float:left;margin-left: 59px;" id="logo">krikla</a>
+        </div>
+        <div class="collapse navbar-collapse" id="menu" style="visibility: visible;animation-duration: 500ms;animation-name: fadeInleft;">
+            <ul class="nav navbar-nav " style="background-color: white;">
+                <li><a href="/">Home</a></li>
+                <li><a href="@aboutUs.Url">ABoutus</a></li>
+                <li><a href="@process.Url">process</a></li>
+                <li><a href="@packages.Url">packages</a></li>
+                <li><a href="@portfolio.Url">PORTFOLIO </a></li>
+                <!--startPortfolio-->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" style="margin-left:-16px"><span><i class="fa fa-angle-double-down"></i></span></a>
+                    <ul class="dropdown-menu" style="border:none">
+                        @foreach (var id in portfolioItems)
+                        {
+                            <li><a href="@id.Url">@id.Name</a></li>
+                        }
+                    </ul>
+                </li>
+                <!--Endportfolio-->
+                @foreach (var item in menuItems)
+                {
+                    <li><a href="@item.Url">@item.Name</a></li>
+                }
+            </ul>
+        </div>
+    </nav>
+
+    <div style="clear:both"></div>
+    <!--End Navbar-->
+    @RenderBody()
+    <!--End LATEST BLOG POSTS-->
+    <div class="clearfix"></div>
+    <!--Start footer-->
+    <div class="menu-footer">
+        <div class="text-center" role="contentinfo">
+            <div id="footer-menu" style="font-size:15px;letter-spacing:1px;color:black;width:1200px;height:111px;margin:0 auto;">
+                <div id="menu-footer-menu" style="padding-left:384px">
+                    <ul>
+                        <li><a href="#">TERMS & CONDITIONS</a></li>
+                        <li><a href="#">PRIVACY POLICYS</a></li>
+                    </ul>
+                </div>
+
+                <div id="local" style="width: 1200px;height:30px;margin-bottom: 30px; margin-top: -5px;">
+                    <ul style="list-style:none;margin: 0 auto;padding-left: 572px;margin-top: 0px">
+                        <li style="width: 25px;height: 20px;"><a href="https://www.facebook.com/KriklaDesign"><div style="font-size:20px;color:black"><i class="fa fa-facebook"></i></div></a></li>
+                        <li style="width: 25px;height: 20px;"><a href="https://www.instagram.com/krikla_interior/"><div style="font-size:20px;color:black"><i class="fa fa-instagram"></i></div></a></li>
+                        <li style="width: 25px;height: 20px;"><a href="https://www.pinterest.co.uk/krikladesign/pins/"><div style="font-size:20px;color:black"><i class="fa fa-pinterest-p"></i></div></a></li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+
+                <div>
+                    <p style="font-weight: 400;letter-spacing: 2px;line-height: 1.3;color: rgba(0,0,0,0.5);font-size: 10px;">© 2011–2018 Krikla Interior Design Services</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--End footer-->
+
+</body>
+
+</html>

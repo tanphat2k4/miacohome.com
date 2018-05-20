@@ -1,7 +1,502 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
-	Layout = "MasterPages.cshtml";
+    Layout = "MasterPages.cshtml";
 }
 
-@* the fun starts here *@
+@{
+    var rootNode = Umbraco.TypedContentAtRoot();
+    var BloghotItems = rootNode.DescendantsOrSelf("blogItem").Where(x => x.GetPropertyValue<bool>("blogHot")).ToList();
+    var Blog = rootNode.DescendantsOrSelf("bLOG").First();
+    var improveItem = rootNode.DescendantsOrSelf("improvePacketForm").First();
+    var Portfolio = rootNode.DescendantsOrSelf("portfolio").First();
 
+    var currentNode = UmbracoContext.Current.PublishedContentRequest.PublishedContent;
+    var bannerArry = currentNode.GetPropertyValue<string>("banner").Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+    var discoverArray = currentNode.GetPropertyValue<string>("discover").Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+}
+
+<!--Start slider-->
+<div id="silder">
+    <div class="container">
+        <br>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <img src="~/images/Banner01.jpg" alt="Chania" style="width:100% ; height:100%">
+                    <div class="carousel-caption" style="position: absolute;display: block;overflow: visible;margin-bottom: 172px; margin-left: -50px;">
+                        <div style="z-index: 6; background-color: rgba(98, 145, 145, 0.5); border-color: rgba(129, 168, 165, 0.5); visibility: inherit; transition: none; text-align: inherit; line-height: 25px; border-width: 0px; margin: 0px; padding: 0px; letter-spacing: 0px; font-weight: 400; font-size: 15px; white-space: nowrap; min-height: 259px; min-width: 854px; max-height: 259px; max-width: 854px; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform-origin: 50% 50% 0px;">
+                            <div>
+                                <span>
+                                    <p style="font-size:30px ; text-transform:uppercase;color:white; padding-top: 58px; text-shadow:none">We help busy families to transform</p>
+                                </span>
+                                <span>
+                                    <p style="font-size:30px ; text-transform:uppercase;color:white;text-shadow:none">their properties into homes</p>
+                                </span>
+                                <span>
+                                    <p style="font-size:30px ; text-transform:uppercase;color:white;text-shadow:none">STRESS-FREE</p>
+                                </span>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="~/images/banner02.jpg" alt="Chania" style="width:100% ; height:100%">
+                    <div class="carousel-caption" style="position: absolute;display: block;overflow: visible;margin-bottom: 172px; margin-left: -50px;">
+                        <div style="z-index: 6; background-color: rgba(98, 145, 145, 0.5); border-color: rgba(129, 168, 165, 0.5); visibility: inherit; transition: none; text-align: inherit; line-height: 25px; border-width: 0px; margin: 0px; padding: 0px; letter-spacing: 0px; font-weight: 400; font-size: 15px; white-space: nowrap; min-height: 259px; min-width: 854px; max-height: 259px; max-width: 854px; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform-origin: 50% 50% 0px;">
+                            <div>
+                                <span>
+                                    <p style="font-size:30px ; text-transform:uppercase;color:white; padding-top: 58px;text-shadow:none">We help busy families to transform</p>
+                                </span>
+                                <span>
+                                    <p style="font-size:30px ; text-transform:uppercase;color:white;text-shadow:none">their properties into homes</p>
+                                </span>
+                                <span>
+                                    <p style="font-size:30px ; text-transform:uppercase;color:white;text-shadow:none">STRESS-FREE</p>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="~/images/banner03.jpg" alt="Flower" style="width:100% ; height:100%">
+                    <div class="carousel-caption" style="position: absolute;display: block;overflow: visible;margin-bottom: 172px; margin-left: -50px;">
+                        <div style="z-index: 6; background-color: rgba(98, 145, 145, 0.5); border-color: rgba(129, 168, 165, 0.5); visibility: inherit; transition: none; text-align: inherit; line-height: 25px; border-width: 0px; margin: 0px; padding: 0px; letter-spacing: 0px; font-weight: 400; font-size: 15px; white-space: nowrap; min-height: 259px; min-width: 854px; max-height: 259px; max-width: 854px; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform-origin: 50% 50% 0px;">
+                            <div>
+                                <span>
+                                    <p style="font-size:30px ; text-transform:uppercase;color:white; padding-top: 58px;text-shadow:none">We help busy families to transform</p>
+                                </span>
+                                <span>
+                                    <p style="font-size:30px ; text-transform:uppercase;color:white;text-shadow:none">their properties into homes</p>
+                                </span>
+                                <span>
+                                    <p style="font-size:30px ; text-transform:uppercase;color:white;text-shadow:none">STRESS-FREE</p>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="~/images/banner04.jpg" alt="Flower" style="width:100% ; height:100%">
+                    <div class="carousel-caption" style="position: absolute;display: block;overflow: visible;margin-bottom: 172px; margin-left: -50px;">
+                        <div style="z-index: 6; background-color: rgba(98, 145, 145, 0.5); border-color: rgba(129, 168, 165, 0.5); visibility: inherit; transition: none; text-align: inherit; line-height: 25px; border-width: 0px; margin: 0px; padding: 0px; letter-spacing: 0px; font-weight: 400; font-size: 15px; white-space: nowrap; min-height: 259px; min-width: 854px; max-height: 259px; max-width: 854px; opacity: 1; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform-origin: 50% 50% 0px;">
+                            <div>
+                                <span>
+                                    <p style="font-size:30px ; text-transform:uppercase;color:white; padding-top: 58px;text-shadow:none">We help busy families to transform</p>
+                                </span>
+                                <span>
+                                    <p style="font-size:30px ; text-transform:uppercase;color:white;text-shadow:none">their properties into homes</p>
+                                </span>
+                                <span>
+                                    <p style="font-size:30px ; text-transform:uppercase;color:white;text-shadow:none">STRESS-FREE</p>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--startHr-->
+<div class="x-content-band vc" style="background-color: #eee;padding-top: 0px;padding-bottom: 0px;">
+    <div class="x-container wpb_row">
+        <div>
+            <hr class="x-gap" style="margin: 3em 0 0 0;">
+        </div>
+    </div>
+</div>
+<!--End Hr-->
+<!--End slider-->
+<a class="x-scroll-top right fade in" href="#top" style=" position: fixed;
+    z-index: 1031;
+    bottom: 10px;
+    width: 35px;
+    height: 35px;
+    margin-bottom: 6px;
+    right: 11px;
+    border: 2px solid #272727;
+    font-size: 25px;
+    line-height: 27px;
+    text-align: center;
+    color: #272727;
+    border-radius: 100%;
+    -webkit-transition: margin-bottom 0.6s ease,opacity 0.3s ease;
+    transition: margin-bottom 0.6s ease,opacity 0.3s ease;">
+    <i class="fa fa-angle-up"></i>
+</a>
+<!-- Start ROOM DESIGN PACKAGES-->
+<div id="DESIGN PACKAGES" class="body" style="height:800px;width:auto">
+    <div style="width:1200px;height:732.38px;margin:0 auto">
+        <div id="pricing" class="container-fluid" style="width:1200px;height:33px;margin:0 auto">
+            <div class="text-center" style="margin-bottom: 77px">
+                <h2>ROOM DESIGN PACKAGES </h2>
+            </div>
+            <div class="row slideanim">
+                <div class="col-sm-4 col-xs-12">
+                    <div class="">
+                        <div class="text-center">
+                            <h1>FURNISH </h1>
+                        </div>
+                        <div class="text-center">
+                            <img class="aligncenter size-full wp-image-5253" src="https://krikla.com/wp-content/uploads/2018/02/krikla-design-service-250.png" alt="Furnish - Interior design services by Krikla" width="300" height="520">
+                        </div>
+                        <div class="text-center" style="margin-top:23px">
+                            <button class="btn btn-lg btn_01"><a href="@improveItem.Url" style="color:#97b2ba;text-decoration:none">GET A QUOTE</a></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-xs-12">
+                    <div class="text-center">
+                        <div class="">
+                            <h1>IMPROVE</h1>
+                        </div>
+                        <div class="">
+                            <img class="aligncenter size-full wp-image-5254" src="https://krikla.com/wp-content/uploads/2018/02/krikla-design-service-350.png" alt="Improve - Interior design services by Krikla" width="300" height="520">
+                        </div>
+                        <div class="text-center" style="margin-top:23px">
+                            <button class="btn btn-lg btn_01"><a href="@improveItem.Url" style="color:#97b2ba;text-decoration:none">GET A QUOTE</a></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-xs-12">
+                    <div class="text-center">
+                        <div class="">
+                            <h1>REFURBISH</h1>
+                        </div>
+                        <div class="">
+                            <img class="aligncenter size-full wp-image-5255" src="https://krikla.com/wp-content/uploads/2018/02/krikla-design-service-600.png" alt="Refurbish - Interior design services by Krikla" width="300" height="520">
+                        </div>
+                        <div class="text-center" style="margin-top:23px">
+                            <button class="btn btn-lg btn_01"><a href="@improveItem.Url" style="color:#97b2ba;text-decoration:none">GET A QUOTE</a></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End ROOM DESIGN PACKAGES-->
+<!--Start LATEST BLOG POSTS-->
+<div id="BLOG POSTS" class="text-center" style="margin-top:80px">
+    <hr />
+    <div id="titlePost" style="margin-top: 45px;">
+        <h2 class="center-text">
+            <span>
+                <h2>LATEST BLOG POSTS</h2>
+            </span>
+        </h2>
+        <hr class="x-gap " style="margin: 3em 0 0 0;" />
+
+    </div>
+    <div class="clearfix"></div>
+    <div id="jcarousel_wrapper" style="margin-top: 55px;">
+        <div id="jcarousel">
+            <ul>
+                @foreach (var item in BloghotItems)
+                {
+                    var thumbnail = Umbraco.TypedMedia(item.GetPropertyValue<int>("thumbnail"));
+                    var url = String.Empty;
+                    if (thumbnail != null)
+                    {
+                        url = thumbnail.Url;
+                    }
+                    <li class="@(BloghotItems.IndexOf(item) % 3 == 1 ? "center" : "")">
+                        <a style="opacity:1" href="@item.Url">
+
+                            <div class="entry-wrap" style="width:35%;height:296.77px">
+                                <div class="x-recent-posts-img" style="width:100%"><img src="@url" /></div>
+                                <div class="x-recent-posts-content center-text" style="font-size:18px;color:black;height: 108px;padding-top: 10px;">
+                                    <h1 class="h-recent-posts" style=" font-size: 18px;padding-bottom: 10px;padding-left: 5px;padding-right: 3px;">@item.Name</h1>
+                                </div>
+                            </div>
+
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div style="margin-top: 46px;;margin-bottom:15px;">
+
+        <button type="button" class="button button_01" style="margin:0 auto;color:white!important" href="@Blog.Url"><a href="" style="color:#97b2ba;text-decoration:none">READ MORE POSTS</a></button>
+
+    </div>
+</div>
+<!--End LATEST BLOG POSTS-->
+<!--startHr-->
+<div class="x-content-band vc" style="background-color: #eee;padding-top: 0px;padding-bottom: 0px;">
+    <div class="x-container wpb_row">
+        <div>
+            <hr class="x-gap" style="margin: 3em 0 0 0;">
+        </div>
+    </div>
+</div>
+<!--End Hr--
+<!--Start LOOKING FOR SOLUTIONS-->
+<div id="SOLUTIONS" style="width:1200px;height:auto;margin:0 auto">
+    <div class="text-center" style="margin-top: 46px; margin-bottom: 73px">
+        <h2>
+            <span>LOOKING FOR SOLUTIONS?</span>
+            <br />
+            <span>OUR CLIENTS SHARE THEIR STORIES….</span>
+        </h2>
+    </div>
+    <div id="abc01" class="carousel slide" data-ride="carousel" style="margin-top: 70px;margin-bottom:70px">
+        <!-- Indicators -->
+        <ol class="carousel-indicators" style="bottom: 10px;">
+            <li data-target="#abc01" data-slide-to="0" class="active" style="border:2px solid white"></li>
+            <li data-target="#abc01" data-slide-to="1" style="border:2px solid white"></li>
+            <li data-target="#abc01" data-slide-to="2" style="border:2px solid white"></li>
+
+        </ol>
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <img src="~/images/solution_03.JPG" alt="Chania" width="460" height="345">
+
+            </div>
+            <div class="item">
+                <img src="~/images/solution_04.JPG" alt="Chania" width="460" height="345">
+            </div>
+            <div class="item">
+                <img src="~/images/SOLUTIONS_01.JPG" alt="Flower" width="460" height="345">
+            </div>
+            <div class="item">
+                <img src="~/images/SOLUTIONS_02.JPG" alt="Flower" width="460" height="345">
+
+            </div>
+        </div>
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#abc01" role="button" data-slide="prev" style="left: 10px;color: white;">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#abc01" role="button" data-slide="next" style="right: 10px;;color: white;">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+<!--End LOOKING FOR SOLUTIONS-->
+<!--startHr-->
+<div class="x-content-band vc" style="background-color: #eee;padding-top: 0px;padding-bottom: 0px;">
+    <div class="x-container wpb_row">
+        <div>
+            <hr class="x-gap" style="margin: 3em 0 0 0;">
+        </div>
+    </div>
+</div>
+<!--End Hr-->
+<!--End LOOKING FOR SOLUTIONS-->
+<!-- Star OUR FOUR STEP PROCESS-->
+<div id="STEP PROCESS" class="container-fluid">
+    <div id="STEP PROCESS01" class="text-center" style="margin-bottom:50px">
+        <div style="width:1200px;height:39px;margin:0 auto">
+            <h2>OUR FOUR STEP PROCESS</h2>
+        </div>
+        <div style="width:1200px;height:21px;margin:0 auto">
+            <span>Any happy design relationship has a great design process behind it.</span>
+        </div>
+    </div>
+    <!--STEP PROCESS01-->
+    <div>
+        <div class="col-sm-6 col-xs-12">
+            <div class="text-center">
+                <h2 style="margin: 0 auto 0.313em !important">
+                    <span>
+                        <h1 class="step">
+                            <i>1</i>
+                            INITIAL VISIT
+                        </h1>
+                    </span>
+                </h2>
+            </div>
+            <div style="text-align:right">
+                <span>Every home is unique. We’ll come round, take measurements, and listen to what you want to achieve.</span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-12" style="margin-bottom: 70px;">
+            <div>
+                <img src="~/images/steps01.jpg" />
+            </div>
+        </div>
+    </div>
+    <!--STEP PROCESS02-->
+    <div>
+        <div class="col-sm-6 col-xs-12">
+            <div class="text-center" style="margin-bottom: 70px;">
+                <img src="~/images/steps02.jpg" />
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-12">
+            <div class="text-center">
+                <h2 style="margin: 0 auto 0.313em !important">
+                    <span>
+                        <h1 class="step">
+                            <i>2</i>
+                            DESIGN CONCEPT
+                        </h1>
+                    </span>
+                </h2>
+            </div>
+            <div style="text-align:left" style="margin-bottom:20px">
+                <span>
+                    We believe in a tailored approach that suits your needs.
+                    Our proposal will consider your style preferences to find the best design for you.
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <!--STEP PROCESS03-->
+    <div>
+        <div class="col-sm-6 col-xs-12">
+            <div class="text-center">
+                <h2 style="margin: 0 auto 0.313em !important">
+                    <span>
+                        <h1 class="step">
+                            <i>3</i>
+                            2D AND/OR 3D DRAWING
+                        </h1>
+                    </span>
+                </h2>
+            </div>
+            <div style="text-align:right">
+                <span>
+                    We believe in a tailored approach that suits your needs.
+                    Our proposal will consider your style preferences to find the best design for you.
+                </span>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-12">
+            <div class="text-center" style="margin-bottom: 70px;">
+                <img src="~/images/step0301.jpg" />
+            </div>
+        </div>
+    </div>
+    <!--STEP PROCESS04-->
+    <div class="col-sm-6 col-xs-12">
+        <div class="text-center" style="margin-bottom: 70px;">
+            <img src="~/images/step04.jpg" />
+        </div>
+    </div>
+    <div class="col-sm-6 col-xs-12">
+
+        <div class="text-center">
+            <h2 style="margin: 0 auto 0.313em !important">
+                <span>
+                    <h1 class="step">
+                        <i>4</i>
+                        SHOPPING LIST
+                    </h1>
+                </span>
+            </h2>
+        </div>
+        <div style="text-align:right">
+            <span>
+                We believe in a tailored approach that suits your needs.
+                Our proposal will consider your style preferences to find the best design for you.
+            </span>
+        </div>
+    </div>
+</div>
+<!--startHr-->
+<div class="x-content-band vc" style="background-color: #eee;padding-top: 0px;padding-bottom: 0px;">
+    <div class="x-container wpb_row">
+        <div>
+            <hr class="x-gap" style="margin: 3em 0 0 0;">
+        </div>
+    </div>
+</div>
+<!--End Hr-->
+<!--End OUR FOUR STEP PROCESS-->
+<!--Start DISCOVER WHAT’S POSSIBLE-->
+<div id="POSSIBLE">
+    <div id="SOLUTIONS" class="text-center" style="width:1200px;height:30px;margin:0 auto">
+        <div class="text-center" style="margin-top: 46px; margin-bottom: 73px">
+            <h2>
+                <span>DISCOVER WHAT’S POSSIBLE</span>
+            </h2>
+        </div>
+    </div>
+    <div style="width:1200px;height:30px;margin:0 auto;font-size:18px;text-align:center; margin-top:10px;margin-bottom:10px">
+        <p>We’ve worked with some wonderful clients. We’ve transformed empty spaces with inspirational and functional design. It’s all about the collaboration. Work with Krikla interior design, and together we’ll create something that truly shines.</p>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="container">
+        <br>
+        <div id="abc" class="carousel slide" data-ride="carousel" style="margin-top: 70px;margin-bottom:220px">
+            <!-- Indicators -->
+            <ol class="carousel-indicators" style="margin-bottom: -213px;">
+                <li data-target="#abc" data-slide-to="0" class="active" style="border:2px solid white"></li>
+                <li data-target="#abc" data-slide-to="1" style="border:2px solid white"></li>
+                <li data-target="#abc" data-slide-to="2" style="border:2px solid white"></li>
+
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <img src="~/images/Capture01.JPG" alt="Chania" width="460" height="345">
+
+                </div>
+                <div class="item">
+                    <img src="~/images/Capture02.JPG" alt="Chania" width="460" height="345">
+
+                </div>
+
+                <div class="item">
+                    <img src="~/images/Capture03.JPG" alt="Flower" width="460" height="345">
+
+                </div>
+            </div>
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#abc" role="button" data-slide="prev" style="margin-bottom: -233px;color: white;">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#abc" role="button" data-slide="next" style="margin-bottom: -233px;color: white;">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="container" style="width:1200px;height:180px;margin:0 auto">
+        <button type="button" class="button button_01" style="color:white!important"><a href="@Portfolio.Url" style="color:#97b2ba;text-decoration:none">View our portfolio</a></button>
+    </div>
+</div>
+
+<!--End DISCOVER WHAT’S POSSIBLE-->
+<!-- chỉnh sau
+        <div class="carousel-inner" role="listbox">
+            <ul>
+              @foreach (var id in discoverArray )
+                 {
+                var image = Umbraco.TypedMedia(id);
+                var url = String.Empty;
+                if (image != null)
+                {
+                    url = image.Url;
+                }
+
+                <li>
+                    <div class="item  @(discoverArray.IndexOf(id) == 1 ? "active" : "")">
+                        <img src="@url" alt="Empty" width="460" height="345">
+                    </div>
+                    </li>
+
+                }
+            </ul>
+        </div>
+            -->

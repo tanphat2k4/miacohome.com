@@ -1,7 +1,145 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
-	Layout = "MasterPages.cshtml";
+    Layout = "MasterPages.cshtml";
 }
 
-@* the fun starts here *@
+@{
+    var rootNode = Umbraco.TypedContentAtRoot();
+    var protfolio = rootNode.DescendantsOrSelf("portfolio").First();
+
+    var currentNode = UmbracoContext.Current.PublishedContentRequest.PublishedContent;
+    var thumbnail = currentNode.GetPropertyValue<string>("thumbnail").Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+}
+
+<body>
+    <!--Start Path-->
+    <div class="path" style="height: 45px;width:100%;border-bottom:0.5px solid rgba(0,0,0,0.23) ">
+        <div class="container-fluid" id="path" style="height:45px;width: 100%;margin-top:80px">
+            <div id="groupPath">
+                <ul style="list-style:none;margin-bottom: 6px;margin-left: -53px;">
+                    <li><a href="/"><div style="color:black"><i class="fa fa-home"></i></div></a></li>
+                    <li style="margin-left: -7px;"><a href="#"><div><i class="fa fa-angle-right"></i></div></a></li>
+                    <li style="margin-left: -7px;padding-top: 0;"><a href="@protfolio.Url"><p>PORTFOLIO</p></a></li>
+                    <li style="margin-left: -7px;"><a href="#"><div><i class="fa fa-angle-right"></i></div></a></li>
+                    <li style="margin-top: -5px;padding-top: 0;"><p>@currentNode.Name</p></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--End Path-->
+    <!--StartContent-->
+    <!--StartImageContent-->
+    <div style="width:1200px;margin:0 auto;height:88px;margin-bottom: 3em;margin-top: 3em;">
+        <span style="font-size:40px;text-align:center; display:block">@currentNode.Name</span>
+    </div>
+    <div style="width:1200px;margin:0 auto;margin-bottom:3em">
+        @foreach (var id in thumbnail)
+        {
+            var image = Umbraco.TypedMedia(id);
+            var url = String.Empty;
+            if (image != null)
+            {
+                url = image.Url;
+            }
+            <ul>
+                <li>
+                    <div class="col-sm-4 col-xs-12">
+                        <div style="margin-bottom:3em">
+                            <img src="@url" alt="" width="300" height="540" />
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+        }
+        <div class="clearfix"></div>
+    </div>
+    <!--The end ImageContent-->
+    <!--Start introduce-->
+    <div>
+        <div class="col-sm-6 col-xs-12">
+            <h2>Apartment in Belgravia</h2>
+            <strong>Solution</strong>
+            <p>For this client’s special project in Belgravia, we needed to artfully combine historic architecture, contemporary art, antique furniture, and heirloom art pieces together to express a sense of beauty and livability. In order to create a balanced yet contemporary look, we used pure whites and neutrals to offset the colour of contemporary pieces, glass art and natural crystal focal pieces.</p>
+
+            <strong>Notable Design</strong>
+            <p>Our palette included neutrals with motifs of blue, and the arrangement and design incorporated the client’s fine art collection, books, antique mirrors, and various vintage pieces including antique wood furniture. Balance and a sense of character was achieved by allowing white space between vignettes and displays.</p>
+
+            <strong>Bringing the Space Together</strong>
+            <p>Contemporary furnishings in neutral colours were complemented by lush accent pillows, and understated yet ornately decorated rugs. The entire project echoed the beautiful gallery like sophistication of historic manor houses, but with a most contemporary flair.</p>
+
+        </div>
+        <div class="col-sm-6 col-xs-12">
+            <p>
+                <em>
+                    “Krikla perfectly understood the historic architecture of our home as well as our love of contemporary art, and truly appreciated our collection of antiques and fine art. The designers seamlessly combined all these elements to create an elegant and thoughtful space. I particularly like the way they used contemporary pieces to modernise the living space, without overshadowing the antiques.”
+                </em>
+            </p>
+            <br />
+            <input type="button" class="button text-center" href="" style=" margin:auto; padding: .643em 1.429em .786em 16px;font-size: 26px;border-radius: .225em;width:576px;height:114px" value="We’d Love To Design Your Apartment"></input>
+            <div class="share-introduce">
+                <p>Share this Post</p>
+                <div class="text-center socialnetwork-introduce ">
+                    <ul>
+                        <li><a><i class="fa fa-facebook-square"></i></a></li>
+                        <li><a><i class="fa fa-twitter-square"></i></a></li>
+                        <li><a><i class="fa fa-google-plus-square"></i></a></li>
+                        <li><a><i class="fa fa-pinterest-square"></i></a></li>
+                        <li><a><i class="fa fa-linkedin-square"></i></a></li>
+                    </ul>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <!--The end introduce-->
+    <!--startFormContent-->
+    <div style="width:1200px;margin:0 auto">
+        <div>
+            <h3 style="font-size: 285.7%;line-height: 1.05;letter-spacing: 0;">Leave a Reply </h3>
+            <p style="margin: 0 0 10px;font-style: normal;font-weight: 400;color: #97b2ba;">
+                Your email address will not be published. Required fields are marked
+                <span style="color:red;font-weight:300">*</span>
+            </p>
+            <p class="">
+                <label form="comment" style="padding-bottom:10px">COMMENT</label>
+                <textarea style="width: 100%;" id="comment" name="comment" cols="45" rows="8" maxlength="65525" aria-required="true" required></textarea>
+            </p>
+            <p id="name">
+                <label for="author">
+                    NAME
+                    <span style="color:red;font-weight:300">*</span>
+                </label>
+                <br />
+                <input style="width:100%;vertical-align: middle;font:inherit;margin:0;font-family:sans-serif;display: inline-block;height: 2.65em;margin-bottom: 9px;border: 1px solid #ddd;padding: 0 .65em;font-size: 13px;line-height: normal;color: #555;background-color: #fff;border-radius: 4px;box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);" id="author" name="author" type="text" value size="30" maxlength="245" aria-required="true" required />
+            </p>
+            <p id="email">
+                <label for="author">
+                    EMAIL
+                    <span style="color:red;font-weight:300">*</span>
+                </label>
+                <br />
+                <input style="width:100%;vertical-align: middle;font:inherit;margin:0;font-family:sans-serif;display: inline-block;height: 2.65em;margin-bottom: 9px;border: 1px solid #ddd;padding: 0 .65em;font-size: 13px;line-height: normal;color: #555;background-color: #fff;border-radius: 4px;box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);" id="author" name="author" type="email" value size="30" maxlength="245" aria-required="true" required />
+            </p>
+            <p id="WEBSITE">
+                <label for="author">
+                    WEBSITE
+                </label>
+                <br />
+                <input style="width:100%;vertical-align: middle;font:inherit;margin:0;font-family:sans-serif;display: inline-block;height: 2.65em;margin-bottom: 9px;border: 1px solid #ddd;padding: 0 .65em;font-size: 13px;line-height: normal;color: #555;background-color: #fff;border-radius: 4px;box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);" id="author" name="author" type="email" value size="30" maxlength="245" aria-required="true" required />
+            </p>
+            <p id="submit">
+
+                <button type="button" href="#" class="button" style="margin:0 auto; margin-bottom:30px" id="author" name="author">SUBMIT</button>
+            </p>
+        </div>
+
+    </div>
+    <!--the endFormContent-->
+    <!--EndContent--->
+    <div class="clearfix"></div>
+</body>
 
