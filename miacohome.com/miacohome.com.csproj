@@ -1975,6 +1975,7 @@
     <Content Include="Config\trees.config" />
     <Content Include="Config\umbracoSettings.config" />
     <Content Include="Media\Web.config" />
+    <Content Include="Miacohome.com.bak" />
     <None Include="packages.config" />
     <Content Include="Umbraco\assets\fonts\helveticons\helveticons.eot" />
     <Content Include="Umbraco\assets\fonts\helveticons\helveticons.ttf" />
